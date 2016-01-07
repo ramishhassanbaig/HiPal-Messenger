@@ -1,2 +1,2 @@
 # HiPal-Messenger
-A complete Chat App
+A comfortable platform to say Hi to your Pals !!
