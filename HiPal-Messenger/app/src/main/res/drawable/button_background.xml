@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<item>-->
+        <!--<shape android:shape="rectangle">-->
+            <!--<solid android:color="#332e2e"/>-->
+            <!--<corners android:radius="20dp"/>-->
+            <!--&lt;!&ndash;<size android:height="200dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:width="200dp"/>&ndash;&gt;-->
+            <!--<padding android:right="1.5dp"-->
+                <!--android:bottom="1.5dp"/>-->
+            <!--<gradient android:angle="90"-->
+                <!--android:startColor="#332e2e"-->
+                <!--android:endColor="#4d4b4b"/>-->
+        <!--</shape>-->
+    <!--</item>-->
+
+    <!--<item>-->
+        <!--<shape android:shape="rectangle">-->
+            <!--<solid android:color="#363636"/>-->
+            <!--<corners android:radius="20dp"/>-->
+            <!--&lt;!&ndash;<size android:height="200dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:width="200dp"/>&ndash;&gt;-->
+            <!--<padding android:right="1dp"-->
+                <!--android:bottom="1dp"/>-->
+            <!--<gradient android:angle="180"-->
+                <!--android:startColor="#363636"-->
+                <!--android:endColor="#6c6c6c"/>-->
+        <!--</shape>-->
+    <!--</item>-->
+
+    <!--<item>-->
+        <!--<shape android:shape="rectangle">-->
+            <!--<solid android:color="#6c6c6c"/>-->
+            <!--<corners android:radius="20dp"/>-->
+            <!--&lt;!&ndash;<size android:height="200dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:width="200dp"/>&ndash;&gt;-->
+            <!--<padding android:right="0.5dp"-->
+                <!--android:bottom="0.5dp"/>-->
+            <!--<gradient android:angle="180"-->
+                <!--android:startColor="#6c6c6c"-->
+                <!--android:endColor="#363636"/>-->
+        <!--</shape>-->
+    <!--</item>-->
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/colorButton"/>
+            <corners android:radius="5dp"/>
+            <!--<size android:height="200dp"-->
+                <!--android:width="200dp"/>-->
+        </shape>
+    </item>
+
+</layer-list>
