@@ -1,24 +1,53 @@
 package com.example.ramish.hipal_messenger.activity;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.ramish.hipal_messenger.R;
 import com.example.ramish.hipal_messenger.fragments.LoginFragment;
+import com.example.ramish.hipal_messenger.fragments.LoginInputFragment;
+import com.example.ramish.hipal_messenger.fragments.SignupFragment;
 import com.firebase.client.Firebase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoginFragment.LoginFragmentInterActionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Firebase.setAndroidContext(this);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.fragment_container,new LoginFragment())
-                .commit();
+        fragmentHandler(1);
 
     }
+
+
+    public void fragmentHandler(int fragmentNumber){
+
+        switch (fragmentNumber){
+            case 1:{
+                createFragment(new LoginFragment());
+                break;
+            }
+            case 2:{
+                createFragment(new LoginInputFragment());
+                break;
+            }
+            case 3:{
+                createFragment(new SignupFragment());
+                break;
+            }
+        }
+
+    }
+
+    public void createFragment(Fragment fragment){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_main,fragment)
+                .addToBackStack("Main")
+                .commit();
+    }
+
+
 }

@@ -1,0 +1,88 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ramish.hipal_messenger.fragments.LoginFragment"
+    android:orientation="vertical"
+    android:background="@color/windowBackground"
+    android:weightSum="4">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="0.5">
+
+        <TextView
+            android:id="@+id/app_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HI PAL !"
+            android:textSize="24dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold|italic"
+            android:textColor="@color/textColorPrimary"/>
+
+        <ImageView
+            android:id="@+id/app_icon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:rotation="45"
+            android:src="@drawable/hand_white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="3.5">
+
+        <EditText
+            android:id="@+id/email_field"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:hint="Enter Email"
+            android:textColorHint="@color/textColorPrimary"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            />
+
+        <EditText
+            android:id="@+id/password_field"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:hint="Enter Password"
+            android:textColorHint="@color/textColorPrimary"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            />
+
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:layout_margin="10dp"
+            android:textColor="@color/textColorPrimary"
+            android:background="@drawable/button_background"
+            />
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:text="@string/forgot_password"
+            android:gravity="center"
+            android:textColor="@color/textColorPrimary"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
