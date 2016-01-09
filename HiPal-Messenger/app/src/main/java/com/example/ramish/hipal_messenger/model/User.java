@@ -6,7 +6,6 @@ package com.example.ramish.hipal_messenger.model;
 public class User {
     private String firstName;
     private String lastName;
-    private String fatherName;
     private int gender; // 1 for male ; 2 for female;
     private String dOB;
     private String email;
@@ -17,22 +16,20 @@ public class User {
     private int friendReqCounter;
     private int notificationCounter;
 
-    private String fullName=firstName+lastName;
+    private String userName =firstName+lastName;
 
-    public User(String firstName, String lastName, String fatherName, int gender, String dOB, String email, String password) {
+    public User(String firstName, String lastName, int gender, String dOB, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.fatherName = fatherName;
         this.gender = gender;
         this.dOB = dOB;
         this.email = email;
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String fatherName, int gender, String dOB, String email, String password, boolean online) {
+    public User(String firstName, String lastName, int gender, String dOB, String email, String password, boolean online) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.fatherName = fatherName;
         this.gender = gender;
         this.dOB = dOB;
         this.email = email;
@@ -47,10 +44,9 @@ public class User {
         this.notificationCounter = notificationCounter;
     }
 
-    public User(String firstName, String lastName, String fatherName, int gender, String dOB, String email, String password, boolean online, int friendCounter, int favoritesCounter, int friendReqCounter, int notificationCounter) {
+    public User(String firstName, String lastName, int gender, String dOB, String email, String password, boolean online, int friendCounter, int favoritesCounter, int friendReqCounter, int notificationCounter) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.fatherName = fatherName;
         this.gender = gender;
         this.dOB = dOB;
         this.email = email;
@@ -78,16 +74,8 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public String getFatherName() {
-        return fatherName;
-    }
-
-    public void setFatherName(String fatherName) {
-        this.fatherName = fatherName;
+    public String getUserName() {
+        return userName;
     }
 
     public int getGender() {
