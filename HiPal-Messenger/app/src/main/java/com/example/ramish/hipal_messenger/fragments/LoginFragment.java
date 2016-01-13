@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ramish.hipal_messenger.R;
+import com.example.ramish.hipal_messenger.activity.MainActivity;
 import com.example.ramish.hipal_messenger.utils.Util;
 
 /**
@@ -48,6 +49,8 @@ public class LoginFragment extends Fragment {
         mHeading.setTypeface(typeface);
 
         mIcon.setRotation(45f);
+
+//        ((MainActivity)getActivity()).fragmentHandler(2);
 
        mSignInButton.setOnClickListener(new View.OnClickListener() {
            @Override

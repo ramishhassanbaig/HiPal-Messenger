@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ramish.hipal_messenger.fragments.SliderMenuFragment">
+
+
+    <RelativeLayout
+        android:id="@+id/slider_menu_header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/vector_blue"
+        >
+
+        <TextView
+            android:id="@+id/app_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HI PAL !"
+            android:textSize="24dp"
+            android:textColor="@color/textColorPrimary"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            />
+
+        <TextView
+            android:id="@+id/user_full_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ramish Hassan"
+            android:textSize="16dp"
+            android:textColor="@color/textColorPrimary"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/app_title"
+            />
+
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mrhb1993@homtail.com"
+            android:textSize="16dp"
+            android:textColor="@color/textColorPrimary"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/user_full_name"
+            />
+
+        <ImageView
+            android:id="@+id/user_profile_pic"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/drawer_profile_pic_border"
+            android:layout_below="@+id/app_title"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp" />
+
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/slider_menu_list_view"
+        android:layout_below="@+id/slider_menu_header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="0dp"
+        android:background="#086DA2"
+        android:paddingTop="20dp">
+
+    </ListView>
+
+</RelativeLayout>

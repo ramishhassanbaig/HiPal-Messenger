@@ -52,6 +52,7 @@
            android:layout_margin="10dp"
            android:textColor="@color/textColorPrimary"
            android:background="@drawable/button_background"
+           style="@style/Widget.AppCompat.Button.Colored"
            />
 
        <ImageButton
@@ -81,6 +82,7 @@
            android:layout_margin="10dp"
            android:textColor="@color/textColorPrimary"
            android:background="@drawable/button_background"
+           style="@style/Widget.AppCompat.Button.Colored"
            />
 
    </LinearLayout>

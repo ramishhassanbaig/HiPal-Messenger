@@ -6,4 +6,5 @@
     <color name="windowBackground">#699CFC</color>
     <color name="textColorPrimary">#FFFAF5</color>
     <color name="colorButton">#00699B</color>
+    <color name="colorTabs">#4A86E8</color>
 </resources>

@@ -15,7 +15,7 @@
         >
 
         <ImageButton
-            android:id="@+id/back_button_login_input"
+            android:id="@+id/back_button_signup"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/back_arrow"
@@ -23,6 +23,7 @@
             android:layout_marginLeft="10dp"/>
 
         <LinearLayout
+            android:id="@+id/signup_header_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -48,6 +49,67 @@
                 android:rotation="45"
                 android:src="@drawable/hand_white"/>
 
+            <LinearLayout
+                android:id="@+id/signup_indicator_layout"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:layout_below="@+id/signup_header_layout"
+                >
+
+                <TextView
+                    android:id="@+id/first_indicator"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/signup_indicator_selected"
+                    android:text="1"
+                    android:gravity="center"
+                    android:textColor="@color/textColorPrimary"
+                    android:paddingTop="0dp"
+                    android:textAlignment="center"
+                    />
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="2dp"
+                    android:background="@color/colorButton"
+                    />
+
+                <TextView
+                    android:id="@+id/second_indicator"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/signup_indicator_normal"
+                    android:text="2"
+                    android:paddingTop="0dp"
+                    android:gravity="center"
+                    android:textColor="@color/textColorPrimary"
+                    android:textAlignment="center"
+                    />
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="2dp"
+                    android:background="@color/colorButton"
+                    />
+
+                <TextView
+                    android:id="@+id/third_indicator"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/signup_indicator_normal"
+                    android:text="3"
+                    android:paddingTop="0dp"
+                    android:gravity="center"
+                    android:textColor="@color/textColorPrimary"
+                    android:textAlignment="center"
+                    />
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
     </RelativeLayout>
@@ -58,110 +120,77 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
         android:layout_weight="3.5"
         android:visibility="visible">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/signup_indicator_selected"
-                android:text="1"
-                android:textColor="@color/textColorPrimary"
-                android:paddingTop="5dp"
-                android:textAlignment="center"
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <View
-                android:layout_width="50dp"
-                android:layout_height="2dp"
-                android:background="@color/colorButton"
-                />
 
-            <TextView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/signup_indicator_normal"
-                android:text="2"
-                android:paddingTop="5dp"
-                android:textColor="@color/textColorPrimary"
-                android:textAlignment="center"
-                />
 
-            <View
-                android:layout_width="50dp"
-                android:layout_height="2dp"
-                android:background="@color/colorButton"
-                />
+                <EditText
+                    android:id="@+id/first_name_field"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:hint="First Name"
+                    android:textColorHint="@color/textColorPrimary"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/textColorPrimary"
+                    />
 
-            <TextView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/signup_indicator_normal"
-                android:text="3"
-                android:paddingTop="5dp"
-                android:textColor="@color/textColorPrimary"
-                android:textAlignment="center"
-                />
+                <EditText
+                    android:id="@+id/last_name_field"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:hint="Last Name"
+                    android:textColorHint="@color/textColorPrimary"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/textColorPrimary"
+                    />
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/birth_date_field"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:hint="Date of Birth"
+                    android:textColorHint="@color/textColorPrimary"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/textColorPrimary"
+                    />
 
-        <EditText
-            android:id="@+id/first_name_field"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:hint="First Name"
-            android:textColorHint="@color/textColorPrimary"
-            android:gravity="center"
-            android:layout_margin="10dp"
-            />
+                <Spinner
+                    android:id="@+id/gender_field"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp">
 
-        <EditText
-            android:id="@+id/last_name_field"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:hint="Last Name"
-            android:textColorHint="@color/textColorPrimary"
-            android:gravity="center"
-            android:layout_margin="10dp"
-            />
+                </Spinner>
 
-        <EditText
-            android:id="@+id/birth_date_field"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:hint="Date of Birth"
-            android:textColorHint="@color/textColorPrimary"
-            android:gravity="center"
-            android:layout_margin="10dp"
-            />
+                <Button
+                    android:id="@+id/next1_button"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/textColorPrimary"
+                    android:background="@drawable/button_background"
+                    android:drawableRight="@drawable/next_arrow"
+                    />
 
-        <Spinner
-            android:id="@+id/gender_field"
-            android:layout_width="200dp"
-            android:layout_height="40dp">
-
-        </Spinner>
-
-        <Button
-            android:id="@+id/next1_button"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Next"
-            android:padding="5dp"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:layout_margin="10dp"
-            android:textColor="@color/textColorPrimary"
-            android:background="@drawable/button_background"
-            android:drawableRight="@drawable/next_arrow"
-            />
+            </LinearLayout>
+        </ScrollView>
 
         </LinearLayout>
 
@@ -176,85 +205,38 @@
             android:visibility="gone"
             >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/signup_indicator_selected"
-                    android:text="1"
-                    android:textColor="@color/textColorPrimary"
-                    android:paddingTop="5dp"
-                    android:textAlignment="center"
-                    />
-
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="2dp"
-                    android:background="@color/colorButton"
-                    />
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/signup_indicator_selected"
-                    android:text="2"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/textColorPrimary"
-                    android:textAlignment="center"
-                    />
-
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="2dp"
-                    android:background="@color/colorButton"
-                    />
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/signup_indicator_normal"
-                    android:text="3"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/textColorPrimary"
-                    android:textAlignment="center"
-                    />
-
-            </LinearLayout>
-
 
             <EditText
                 android:id="@+id/email_field"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:hint="First Name"
+                android:hint="Email"
                 android:textColorHint="@color/textColorPrimary"
                 android:gravity="center"
                 android:layout_margin="10dp"
+                android:textColor="@color/textColorPrimary"
                 />
 
             <EditText
                 android:id="@+id/password_field"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:hint="Last Name"
+                android:hint="password"
                 android:textColorHint="@color/textColorPrimary"
                 android:gravity="center"
                 android:layout_margin="10dp"
+                android:textColor="@color/textColorPrimary"
                 />
 
             <EditText
                 android:id="@+id/password_confirm_field"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:hint="Date of Birth"
+                android:hint="confirm password"
                 android:textColorHint="@color/textColorPrimary"
                 android:gravity="center"
                 android:layout_margin="10dp"
+                android:textColor="@color/textColorPrimary"
                 />
 
             <Button
@@ -283,58 +265,10 @@
         android:visibility="gone"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/signup_indicator_selected"
-                android:text="1"
-                android:textColor="@color/textColorPrimary"
-                android:paddingTop="5dp"
-                android:textAlignment="center"
-                />
-
-            <View
-                android:layout_width="50dp"
-                android:layout_height="2dp"
-                android:background="@color/colorButton"
-                />
-
-            <TextView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/signup_indicator_selected"
-                android:text="2"
-                android:paddingTop="5dp"
-                android:textColor="@color/textColorPrimary"
-                android:textAlignment="center"
-                />
-
-            <View
-                android:layout_width="50dp"
-                android:layout_height="2dp"
-                android:background="@color/colorButton"
-                />
-
-            <TextView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/signup_indicator_selected"
-                android:text="3"
-                android:paddingTop="5dp"
-                android:textColor="@color/textColorPrimary"
-                android:textAlignment="center"
-                />
-
-        </LinearLayout>
 
 
         <ImageView
+            android:id="@+id/profile_picture_field"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="10dp"

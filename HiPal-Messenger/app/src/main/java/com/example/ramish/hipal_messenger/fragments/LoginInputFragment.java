@@ -1,6 +1,7 @@
 package com.example.ramish.hipal_messenger.fragments;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.ramish.hipal_messenger.R;
 
@@ -16,9 +18,11 @@ import com.example.ramish.hipal_messenger.R;
  */
 public class LoginInputFragment extends Fragment {
 
+    private TextView mHeading;
     private EditText mEmailField;
     private EditText mPasswordField;
     private Button mLoginButton;
+    private Typeface typeface;
 
     public LoginInputFragment() {
         // Required empty public constructor
@@ -33,10 +37,14 @@ public class LoginInputFragment extends Fragment {
 
         initializingView(rootView);
 
+        typeface= Typeface.createFromAsset(getActivity().getAssets(), "fonts/ComicSansBold.ttf");
+        mHeading.setTypeface(typeface);
+
         return  rootView;
     }
 
     private void initializingView(View view){
+        mHeading=(TextView)view.findViewById(R.id.app_heading);
         mEmailField=(EditText)view.findViewById(R.id.email_field);
         mPasswordField=(EditText)view.findViewById(R.id.password_field);
         mLoginButton=(Button)view.findViewById(R.id.login_button);
