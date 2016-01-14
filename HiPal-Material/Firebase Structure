@@ -1,0 +1,54 @@
+Firebase Chat Structure
+
+Users{
+	Username{
+		FirstName
+		LastName
+		DOB
+		Email
+		Password
+		isOnline
+		Friends{
+			FriendName1
+			FriendName2
+		}
+		FriendCounter
+		Favorites{
+			ChatId1
+			ChatId2
+		}
+		FavoritesCounter
+		FriendRequest{
+			FriendName1
+			FriendName2
+		}
+		FriendRequestCounter
+		NotificationCounter
+		Notification{
+			From
+			Message
+		}
+		Chats{
+			ChatId1
+			ChatId2
+		}
+	}
+}
+
+
+Chats{
+	ChatId{
+		ChatName
+		Admin:Username1
+		members{
+			Username1
+			Username2
+		}
+		messages{
+			messageID{
+				messageText
+				sender
+			}
+		}
+	}
+}

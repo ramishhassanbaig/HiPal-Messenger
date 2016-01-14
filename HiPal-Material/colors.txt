@@ -1,0 +1,6 @@
+#033AA0 --- primary
+#015E87 --- primary dark
+#00699B --- button
+#FFFAF5 --- text
+#699CFC --- windowBackground
+#1376a1 --- colorAccent
