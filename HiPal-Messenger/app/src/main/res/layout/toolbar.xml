@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
     android:id="@+id/hipal_toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?attr/actionBarSize"
-    android:subtitleTextColor="@color/textColorPrimary"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:rotation="45"
-        android:background="@drawable/hand_white"/>
+    <!--<ImageView-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:rotation="45"-->
+        <!--android:background="@drawable/hand_white"/>-->
 
 </android.support.v7.widget.Toolbar>

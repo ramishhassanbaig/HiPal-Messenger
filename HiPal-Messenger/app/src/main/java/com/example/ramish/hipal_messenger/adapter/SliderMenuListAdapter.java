@@ -42,9 +42,11 @@ public class SliderMenuListAdapter extends ArrayAdapter {
         title.setText(sliderMenuListItems.get(position).getTitle());
 
         if (sliderMenuListItems.get(position).isCountVisible()){
-            count.setText(sliderMenuListItems.get(position).getCount());
+            sliderMenuListItems.get(position).setCountVisible(true);
+            count.setText(String.valueOf(sliderMenuListItems.get(position).getCount()));
         }
         else count.setVisibility(View.GONE);
+
 
 
         return convertView;

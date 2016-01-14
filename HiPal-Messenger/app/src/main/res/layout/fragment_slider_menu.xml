@@ -27,7 +27,7 @@
             android:id="@+id/user_full_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ramish Hassan"
+            android:text="Ramish Baig"
             android:textSize="16dp"
             android:textColor="@color/textColorPrimary"
             android:layout_marginLeft="20dp"

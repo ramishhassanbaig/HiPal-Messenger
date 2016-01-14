@@ -66,12 +66,12 @@ public class SliderMenuFragment extends Fragment {
 
         sliderMenuListItems=new ArrayList<SliderMenuListItem>();
 
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[0],itemIcons.getResourceId(0,-1),10,false));
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[1],itemIcons.getResourceId(1,-1),11,false));
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[2],itemIcons.getResourceId(2,-1),12,false));
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[3],itemIcons.getResourceId(3,-1),13,false));
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[4],itemIcons.getResourceId(4,-1),10,false));
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[5],itemIcons.getResourceId(5,-1),10,false));
+        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[0],itemIcons.getResourceId(0,-1),10,true));
+        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[1],itemIcons.getResourceId(1,-1),11,true));
+        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[2],itemIcons.getResourceId(2,-1),12,true));
+        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[3],itemIcons.getResourceId(3,-1),13,true));
+        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[4],itemIcons.getResourceId(4,-1),14,true));
+        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[5],itemIcons.getResourceId(5,-1),15,true));
 
         itemIcons.recycle();
 
@@ -102,7 +102,7 @@ public class SliderMenuFragment extends Fragment {
     public void setUpSliderMenuFragment(int fragmentId,DrawerLayout drawerLayout,final Toolbar toolbar){
         fragmentContainerView=getActivity().findViewById(fragmentId);
         mDrawerLayout=drawerLayout;
-        mDrawerToggle=new ActionBarDrawerToggle(getActivity(),drawerLayout,R.string.drawer_open,R.string.drawer_close){
+        mDrawerToggle=new ActionBarDrawerToggle(getActivity(),drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
