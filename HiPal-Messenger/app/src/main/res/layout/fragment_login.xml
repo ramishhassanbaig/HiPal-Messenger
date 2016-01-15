@@ -52,8 +52,9 @@
            android:layout_margin="10dp"
            android:textColor="@color/textColorPrimary"
            android:background="@drawable/button_background"
-           style="@style/Widget.AppCompat.Button.Colored"
+           style="@style/SelectableItemBackground"
            />
+
 
        <ImageButton
            android:id="@+id/google_signin"
@@ -82,7 +83,7 @@
            android:layout_margin="10dp"
            android:textColor="@color/textColorPrimary"
            android:background="@drawable/button_background"
-           style="@style/Widget.AppCompat.Button.Colored"
+           style="@style/SelectableItemBackground"
            />
 
    </LinearLayout>

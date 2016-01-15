@@ -87,7 +87,7 @@ public class LoginFragment extends Fragment {
 
     public interface LoginFragmentInterActionListener{
         public void fragmentHandler(int fragmentNumber);
-        public void createFragment(Fragment fragment);
+        public void changeFragment(Fragment fragment);
     }
 
 
