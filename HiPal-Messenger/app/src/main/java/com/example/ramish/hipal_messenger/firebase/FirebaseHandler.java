@@ -25,7 +25,9 @@ public class FirebaseHandler {
 
 
 
-
+    public Firebase getRootRef() {
+        return rootRef;
+    }
 
     public Firebase getUserRef() {
         return userRef=rootRef.child("Users");

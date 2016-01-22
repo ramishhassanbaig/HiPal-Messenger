@@ -1,8 +1,10 @@
 package com.example.ramish.hipal_messenger.fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -25,8 +27,12 @@ import com.example.ramish.hipal_messenger.HiPalMessengerApp;
 import com.example.ramish.hipal_messenger.R;
 import com.example.ramish.hipal_messenger.activity.HomeActivity;
 import com.example.ramish.hipal_messenger.activity.MainActivity;
+import com.example.ramish.hipal_messenger.firebase.FirebaseHandler;
 import com.example.ramish.hipal_messenger.model.User;
+import com.example.ramish.hipal_messenger.service.UserCreationService;
 import com.example.ramish.hipal_messenger.utils.Util;
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,6 +74,8 @@ public class SignupFragment extends Fragment {
 
     private User newCreatedUser;
 
+    public static ProgressDialog signUpProgressDialog;
+
 
 
     public SignupFragment() {
@@ -95,7 +103,7 @@ public class SignupFragment extends Fragment {
         mAppIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Animation wavingHand=AnimationUtils.loadAnimation((MainActivity)getActivity(),R.anim.wave);
+                Animation wavingHand = AnimationUtils.loadAnimation((MainActivity) getActivity(), R.anim.wave);
                 mAppIcon.startAnimation(wavingHand);
             }
         });
@@ -104,21 +112,20 @@ public class SignupFragment extends Fragment {
         mNextButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mFirstNameField.getText().toString().equals("") || mLastNameField.getText().toString().equals("") || mBirthDate.getText().toString().equals("")){
-                    if (mFirstNameField.getText().toString().equals("")){
+                if (mFirstNameField.getText().toString().equals("") || mLastNameField.getText().toString().equals("") || mBirthDate.getText().toString().equals("")) {
+                    if (mFirstNameField.getText().toString().equals("")) {
                         fieldShakingAnimation(mFirstNameField);
                         mFirstNameField.setError("necessary field");
                     }
-                    if (mLastNameField.getText().toString().equals("")){
+                    if (mLastNameField.getText().toString().equals("")) {
                         fieldShakingAnimation(mLastNameField);
                         mLastNameField.setError("necessary field");
                     }
-                    if (mBirthDate.getText().toString().equals("")){
+                    if (mBirthDate.getText().toString().equals("")) {
                         fieldShakingAnimation(mBirthDate);
                         mBirthDate.setError("necessary field");
                     }
-                }
-                else {
+                } else {
                     mSecondIndicator.setBackgroundResource(R.drawable.signup_indicator_selected);
                     signUpScreen1.setVisibility(signUpScreen1.GONE);
                     signUpScreen2.setVisibility(signUpScreen2.VISIBLE);
@@ -138,24 +145,23 @@ public class SignupFragment extends Fragment {
 //                    mPasswordConfirmField.setError("Passwords does not match");
 //                }
 
-                if (mEmailField.getText().toString().equals("") || mPasswordField.getText().toString().equals("") || mPasswordConfirmField.getText().toString().equals("")){
-                    if (mEmailField.getText().toString().equals("")){
+                if (mEmailField.getText().toString().equals("") || mPasswordField.getText().toString().equals("") || mPasswordConfirmField.getText().toString().equals("")) {
+                    if (mEmailField.getText().toString().equals("")) {
                         fieldShakingAnimation(mEmailField);
                         mEmailField.setError("necessary field");
                     }
-                    if (mPasswordField.getText().toString().equals("")){
+                    if (mPasswordField.getText().toString().equals("")) {
                         fieldShakingAnimation(mPasswordField);
                         mPasswordField.setError("necessary field");
                     }
-                    if (mPasswordConfirmField.getText().toString().equals("")){
+                    if (mPasswordConfirmField.getText().toString().equals("")) {
                         fieldShakingAnimation(mPasswordConfirmField);
                         mPasswordConfirmField.setError("necessary field");
                     }
                 }
-                if (!(mPasswordField.getText().toString().equals(mPasswordConfirmField.getText().toString()))){
+                if (!(mPasswordField.getText().toString().equals(mPasswordConfirmField.getText().toString()))) {
                     mPasswordConfirmField.setError("Passwords does not match");
-                }
-                else {
+                } else {
                     mThirdIndicator.setBackgroundResource(R.drawable.signup_indicator_selected);
                     signUpScreen2.setVisibility(signUpScreen2.GONE);
                     signUpScreen3.setVisibility(signUpScreen3.VISIBLE);
@@ -179,10 +185,18 @@ public class SignupFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 newCreatedUser=getSignUpDetails();
-                Log.d("Signup:",newCreatedUser.getFirstName()+", "+newCreatedUser.getLastName()+", "+
-                        newCreatedUser.getGender()+", "+newCreatedUser.getEmail()+", "+newCreatedUser.getPassword());
-                Intent i = new Intent(getActivity(), HomeActivity.class);
-                startActivity(i);
+                Log.d("Signup:", newCreatedUser.getFirstName() + ", " + newCreatedUser.getLastName() + ", " +
+                        newCreatedUser.getGender() + ", " + newCreatedUser.getEmail() + ", " + newCreatedUser.getPassword());
+
+                signUpProgressDialog=new ProgressDialog((MainActivity)getActivity());
+                signUpProgressDialog.setTitle("Creating User");
+                signUpProgressDialog.setMessage("Please Wait...");
+                signUpProgressDialog.setIndeterminate(true);
+                signUpProgressDialog.setCancelable(false);
+                new SignUpProgress(newCreatedUser).execute();
+
+//                Intent i = new Intent(getActivity(), HomeActivity.class);
+//                startActivity(i);
             }
         });
 
@@ -270,6 +284,37 @@ public class SignupFragment extends Fragment {
         }
     }
 
+    private class SignUpProgress extends AsyncTask<Void,Void,Void>{
+
+        private User asyncUser;
+
+        public SignUpProgress(User user){
+            asyncUser =user;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            signUpProgressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                UserCreationService.createAuthenticatedUser(asyncUser);
+                Thread.sleep(3000);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            signUpProgressDialog.dismiss();
+            Intent i = new Intent(getActivity(), HomeActivity.class);
+            startActivity(i);
+        }
+    }
 
 
 }

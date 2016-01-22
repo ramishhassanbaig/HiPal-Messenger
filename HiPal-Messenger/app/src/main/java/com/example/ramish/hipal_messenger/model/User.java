@@ -16,7 +16,7 @@ public class User {
     private int friendReqCounter=0;
     private int notificationCounter=0;
 
-    private String userName =firstName+lastName;
+    private String userName;
 
     public User(String firstName, String lastName, int gender, String dOB, String email, String password) {
         this.firstName = firstName;
@@ -25,6 +25,7 @@ public class User {
         this.dOB = dOB;
         this.email = email;
         this.password = password;
+        this.userName=firstName+" "+lastName;
     }
 
     public User(String firstName, String lastName, int gender, String dOB, String email, String password, boolean online) {

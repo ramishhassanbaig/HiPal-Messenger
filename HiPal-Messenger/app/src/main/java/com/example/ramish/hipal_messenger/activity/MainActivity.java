@@ -2,6 +2,7 @@ package com.example.ramish.hipal_messenger.activity;
 
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 .addToBackStack("Main")
                 .commit();
     }
+
 
     @Override
     public void onBackPressed() {
