@@ -2,8 +2,10 @@ package com.example.ramish.hipal_messenger.activity;
 
 import android.app.Activity;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
 import android.view.ViewParent;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +31,7 @@ import com.example.ramish.hipal_messenger.fragments.FriendsFragment;
 import com.example.ramish.hipal_messenger.fragments.NotificationsFragment;
 import com.example.ramish.hipal_messenger.fragments.SliderMenuFragment;
 import com.example.ramish.hipal_messenger.model.Notification;
+import com.example.ramish.hipal_messenger.utils.Util;
 
 public class HomeActivity extends AppCompatActivity implements SliderMenuFragment.FragmentDrawerListener{
 
@@ -35,9 +39,11 @@ public class HomeActivity extends AppCompatActivity implements SliderMenuFragmen
     private SliderMenuFragment sliderMenuFragment;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private FrameLayout fragmentContainer;
 
     private String[] tabTitles={"Chats","Friends","Notifications"};
     private int[] tabIcons={R.drawable.chats_icon,R.drawable.friends_icon,R.drawable.notification};
+    private boolean backPressedOnce=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,7 @@ public class HomeActivity extends AppCompatActivity implements SliderMenuFragmen
         setContentView(R.layout.activity_home);
 
         toolbar=(Toolbar)findViewById(R.id.hipal_toolbar);
+        fragmentContainer=(FrameLayout)findViewById(R.id.fragment_container_home);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -60,6 +67,28 @@ public class HomeActivity extends AppCompatActivity implements SliderMenuFragmen
 
         viewPager=(ViewPager)findViewById(R.id.home_view_pager);
         setUpViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (fragmentContainer.getVisibility()==View.VISIBLE){
+                    fragmentContainer.setVisibility(View.GONE);
+                    viewPager.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
 
         tabLayout=(TabLayout)findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
@@ -71,6 +100,7 @@ public class HomeActivity extends AppCompatActivity implements SliderMenuFragmen
         sliderMenuFragment=(SliderMenuFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_slider_menu);
         sliderMenuFragment.setUpSliderMenuFragment(R.id.fragment_slider_menu,(DrawerLayout)findViewById(R.id.home_drawer_layout),toolbar);
         sliderMenuFragment.setDrawerListener(this);
+
 
     }
 
@@ -96,24 +126,31 @@ public class HomeActivity extends AppCompatActivity implements SliderMenuFragmen
     }
 
     public void fragmentHandler(int fragmentNumber){
+
         switch (fragmentNumber){
+            case 0:{
+                changeFragment(new FriendsFragment());
+                break;
+            }
             case 1:{
-                changeFragment(new ChatsFragment());
+                changeFragment(new FindPeopleFragment());
+                break;
             }
             case 2:{
-                changeFragment(new FavoritesFragment());
+                changeFragment(new FriendRequestFragment());
+                break;
             }
             case 3:{
-                changeFragment(new FindPeopleFragment());
+                changeFragment(new ChatsFragment());
+                break;
             }
             case 4:{
-                changeFragment(new FriendRequestFragment());
+                changeFragment(new FavoritesFragment());
+                break;
             }
             case 5:{
-                changeFragment(new FriendsFragment());
-            }
-            case 6:{
                 changeFragment(new NotificationsFragment());
+                break;
             }
         }
 
@@ -124,6 +161,15 @@ public class HomeActivity extends AppCompatActivity implements SliderMenuFragmen
                 .replace(R.id.fragment_container_home,fragment)
                 .addToBackStack("Home")
                 .commit();
+    }
+
+    public void checkContainerVisibility(){
+        FrameLayout frameLayout=(FrameLayout)findViewById(R.id.fragment_container_home);
+        ViewPager viewPager=(ViewPager)findViewById(R.id.home_view_pager);
+        if (viewPager.getVisibility()==View.VISIBLE){
+            viewPager.setVisibility(View.GONE);
+            frameLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setUpViewPager(ViewPager viewPager){
@@ -141,5 +187,34 @@ public class HomeActivity extends AppCompatActivity implements SliderMenuFragmen
         title.setText(tabTitles[position]);
         icon.setImageResource(tabIcons[position]);
         return tab;
+    }
+
+    @Override
+    public void onBackPressed() {
+        getSupportFragmentManager().popBackStackImmediate("Home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//        super.onBackPressed();
+        FrameLayout frameLayout=(FrameLayout)findViewById(R.id.fragment_container_home);
+        ViewPager viewPager=(ViewPager)findViewById(R.id.home_view_pager);
+        if (viewPager.getVisibility()==View.GONE){
+            frameLayout.setVisibility(View.GONE);
+            viewPager.setVisibility(View.VISIBLE);
+        }
+        int getFragmentsCount=getSupportFragmentManager().getBackStackEntryCount();
+        if (viewPager.getVisibility()==View.VISIBLE && getFragmentsCount==0){
+            if (backPressedOnce) {
+                super.onBackPressed();
+            } else {
+                this.backPressedOnce = true;
+                Util.showToast("Press again to exit");
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        backPressedOnce = false;
+                    }
+                }, 2000);
+            }
+        }
+
     }
 }

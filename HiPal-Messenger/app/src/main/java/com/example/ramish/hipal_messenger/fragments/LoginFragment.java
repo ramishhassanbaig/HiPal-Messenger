@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -50,6 +52,14 @@ public class LoginFragment extends Fragment {
 
         mIcon.setRotation(45f);
 
+        mIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation wavingHand = AnimationUtils.loadAnimation((MainActivity) getActivity(), R.anim.wave);
+                mIcon.startAnimation(wavingHand);
+            }
+        });
+
 //        ((MainActivity)getActivity()).fragmentHandler(2);
 
        mSignInButton.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +77,8 @@ public class LoginFragment extends Fragment {
                 mListener.fragmentHandler(3);
             }
         });
+
+
 
 
         return rootView;

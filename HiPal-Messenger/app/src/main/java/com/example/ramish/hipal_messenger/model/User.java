@@ -6,15 +6,15 @@ package com.example.ramish.hipal_messenger.model;
 public class User {
     private String firstName;
     private String lastName;
-    private int gender; // 1 for male ; 2 for female;
+    private int gender; // 0 for male ; 1 for female;
     private String dOB;
     private String email;
     private String password;
-    private boolean online;
-    private int friendCounter;
-    private int favoritesCounter;
-    private int friendReqCounter;
-    private int notificationCounter;
+    private boolean online=false;
+    private int friendCounter=0;
+    private int favoritesCounter=0;
+    private int friendReqCounter=0;
+    private int notificationCounter=0;
 
     private String userName =firstName+lastName;
 

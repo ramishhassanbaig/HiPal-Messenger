@@ -7,11 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ramish.hipal_messenger.R;
+import com.example.ramish.hipal_messenger.activity.MainActivity;
+import com.example.ramish.hipal_messenger.utils.Util;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,9 +25,11 @@ import com.example.ramish.hipal_messenger.R;
 public class LoginInputFragment extends Fragment {
 
     private TextView mHeading;
+    private ImageView mAppIcon;
     private EditText mEmailField;
     private EditText mPasswordField;
     private Button mLoginButton;
+    private ImageButton mBackButton;
     private Typeface typeface;
 
     public LoginInputFragment() {
@@ -40,14 +48,34 @@ public class LoginInputFragment extends Fragment {
         typeface= Typeface.createFromAsset(getActivity().getAssets(), "fonts/ComicSansBold.ttf");
         mHeading.setTypeface(typeface);
 
+        mAppIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation wavingHand = AnimationUtils.loadAnimation((MainActivity) getActivity(), R.anim.wave);
+                mAppIcon.startAnimation(wavingHand);
+            }
+        });
+
+
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).getSupportFragmentManager().popBackStack();
+                Util.showToast("popped back");
+            }
+        });
+
+
         return  rootView;
     }
 
     private void initializingView(View view){
+        mAppIcon=(ImageView)view.findViewById(R.id.app_icon);
         mHeading=(TextView)view.findViewById(R.id.app_heading);
         mEmailField=(EditText)view.findViewById(R.id.email_field);
         mPasswordField=(EditText)view.findViewById(R.id.password_field);
         mLoginButton=(Button)view.findViewById(R.id.login_button);
+        mBackButton=(ImageButton)view.findViewById(R.id.back_button_login_input);
     }
 
 }

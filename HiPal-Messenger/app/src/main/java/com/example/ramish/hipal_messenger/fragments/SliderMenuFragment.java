@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ramish.hipal_messenger.R;
+import com.example.ramish.hipal_messenger.activity.HomeActivity;
 import com.example.ramish.hipal_messenger.adapter.SliderMenuListAdapter;
 import com.example.ramish.hipal_messenger.model.SliderMenuListItem;
 import com.example.ramish.hipal_messenger.utils.Util;
@@ -81,7 +82,9 @@ public class SliderMenuFragment extends Fragment {
         sliderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Util.showToast("drawer clicked");
+                Util.showToast(itemTitles[position]+" clicked");
+                ((HomeActivity)getActivity()).checkContainerVisibility();
+                ((HomeActivity)getActivity()).fragmentHandler(position);
                 mDrawerLayout.closeDrawer(fragmentContainerView);
             }
         });

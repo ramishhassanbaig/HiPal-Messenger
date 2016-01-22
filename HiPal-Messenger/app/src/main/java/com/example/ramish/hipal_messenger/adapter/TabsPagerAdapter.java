@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.ramish.hipal_messenger.activity.HomeActivity;
+import com.example.ramish.hipal_messenger.utils.Util;
 
 import java.util.ArrayList;
 import java.util.List;
