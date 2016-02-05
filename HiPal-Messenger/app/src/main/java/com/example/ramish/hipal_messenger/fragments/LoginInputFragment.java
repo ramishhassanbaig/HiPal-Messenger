@@ -80,7 +80,7 @@ public class LoginInputFragment extends Fragment {
                 loginPassword=mPasswordField.getText().toString();
 
                 loginProgressDialog= new ProgressDialog((MainActivity) getActivity());
-                loginProgressDialog.setTitle("Logging In");
+                loginProgressDialog.setTitle("Signing In");
                 loginProgressDialog.setMessage("Please Wait...");
                 loginProgressDialog.setIndeterminate(true);
                 loginProgressDialog.setCancelable(false);

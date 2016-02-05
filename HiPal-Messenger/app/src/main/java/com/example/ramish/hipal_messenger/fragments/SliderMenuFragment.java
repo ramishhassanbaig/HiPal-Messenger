@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,9 @@ import com.example.ramish.hipal_messenger.model.User;
 import com.example.ramish.hipal_messenger.service.LocalUserService;
 import com.example.ramish.hipal_messenger.utils.Util;
 import com.firebase.client.AuthData;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
 
 import java.util.ArrayList;
 
@@ -59,7 +63,6 @@ public class SliderMenuFragment extends Fragment {
         this.drawerListener = listener;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,9 +70,10 @@ public class SliderMenuFragment extends Fragment {
         View rootView=inflater.inflate(R.layout.fragment_slider_menu, container, false);
 
         userLoggedIn= LocalUserService.getLocalUser();
-        Log.d("SliderMenuUser", userLoggedIn.getUserName().toString());
+        Log.d("SliderMenuUser", userLoggedIn.getUserName());
 
         initializingView(rootView);
+
 
         sliderUserName.setText(userLoggedIn.getUserName());
         sliderUserEmail.setText(userLoggedIn.getEmail());
@@ -77,30 +81,29 @@ public class SliderMenuFragment extends Fragment {
         itemTitles=getResources().getStringArray(R.array.slider_menu_list_titles);
         itemIcons=getResources().obtainTypedArray(R.array.slider_menu_list_icons);
 
-        sliderMenuListItems=new ArrayList<SliderMenuListItem>();
-
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[0],itemIcons.getResourceId(0, -1),userLoggedIn.getFriendCounter(),true));
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[1],itemIcons.getResourceId(1,-1),0,true));
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[2],itemIcons.getResourceId(2, -1),userLoggedIn.getFriendReqCounter(),true));
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[3],itemIcons.getResourceId(3,-1),0,true));
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[4],itemIcons.getResourceId(4, -1),userLoggedIn.getFavoritesCounter(),true));
-        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[5],itemIcons.getResourceId(5, -1),userLoggedIn.getNotificationCounter(),true));
-
-        itemIcons.recycle();
-
-        sliderMenuListAdapter=new SliderMenuListAdapter(getContext(),R.id.slider_menu_list_view,sliderMenuListItems);
-        sliderListView.setAdapter(sliderMenuListAdapter);
+//        sliderMenuListItems=new ArrayList<SliderMenuListItem>();
+//
+//        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[0],itemIcons.getResourceId(0, -1),userLoggedIn.getFriendCounter(),true));
+//        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[1],itemIcons.getResourceId(1, -1),0,true));
+//        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[2],itemIcons.getResourceId(2, -1),userLoggedIn.getFriendReqCounter(),true));
+//        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[3],itemIcons.getResourceId(3, -1),0,true));
+//        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[4],itemIcons.getResourceId(4, -1),userLoggedIn.getFavoritesCounter(),true));
+//        sliderMenuListItems.add(new SliderMenuListItem(itemTitles[5], itemIcons.getResourceId(5, -1), userLoggedIn.getNotificationCounter(), true));
+//
+//        itemIcons.recycle();
+//
+//        sliderMenuListAdapter=new SliderMenuListAdapter(getContext(),R.id.slider_menu_list_view,sliderMenuListItems);
+//        sliderListView.setAdapter(sliderMenuListAdapter);
 
         sliderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Util.showToast(itemTitles[position]+" clicked");
-                ((HomeActivity)getActivity()).checkContainerVisibility();
-                ((HomeActivity)getActivity()).fragmentHandler(position);
+                Util.showToast(itemTitles[position] + " clicked");
+                ((HomeActivity) getActivity()).checkContainerVisibility();
+                ((HomeActivity) getActivity()).fragmentHandler(position);
                 mDrawerLayout.closeDrawer(fragmentContainerView);
             }
         });
-
 
 
 
@@ -122,6 +125,27 @@ public class SliderMenuFragment extends Fragment {
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 getActivity().invalidateOptionsMenu();
+
+                LocalUserService.loggedInUserUpdate(userLoggedIn);
+                userLoggedIn=LocalUserService.getLocalUser();
+                Log.d("FromDrawer",String.valueOf(userLoggedIn.getFriendCounter()));
+
+                itemTitles=getResources().getStringArray(R.array.slider_menu_list_titles);
+                itemIcons=getResources().obtainTypedArray(R.array.slider_menu_list_icons);
+
+                sliderMenuListItems=new ArrayList<SliderMenuListItem>();
+
+                sliderMenuListItems.add(new SliderMenuListItem(itemTitles[0],itemIcons.getResourceId(0, -1),userLoggedIn.getFriendCounter(),true));
+                sliderMenuListItems.add(new SliderMenuListItem(itemTitles[1],itemIcons.getResourceId(1, -1),0,true));
+                sliderMenuListItems.add(new SliderMenuListItem(itemTitles[2],itemIcons.getResourceId(2, -1),userLoggedIn.getFriendReqCounter(),true));
+                sliderMenuListItems.add(new SliderMenuListItem(itemTitles[3],itemIcons.getResourceId(3, -1),0,true));
+                sliderMenuListItems.add(new SliderMenuListItem(itemTitles[4],itemIcons.getResourceId(4, -1),userLoggedIn.getFavoritesCounter(),true));
+                sliderMenuListItems.add(new SliderMenuListItem(itemTitles[5], itemIcons.getResourceId(5, -1), userLoggedIn.getNotificationCounter(), true));
+
+                itemIcons.recycle();
+
+                sliderMenuListAdapter=new SliderMenuListAdapter(getContext(),R.id.slider_menu_list_view,sliderMenuListItems);
+                sliderListView.setAdapter(sliderMenuListAdapter);
             }
 
             @Override

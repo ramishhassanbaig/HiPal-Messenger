@@ -42,6 +42,7 @@ public class UserCreationService {
                     @Override
                     public void onSuccess() {
                         createFirebaseUser(currentUser);
+                        progressDialog.setMessage("Signing in...");
                         loginAuthenticatedUser(currentUser.getEmail(),currentUser.getPassword(),progressDialog,activity);
 //                        Intent i = new Intent(activity, HomeActivity.class);
 //                        activity.startActivity(i);

@@ -2,10 +2,12 @@ package com.example.ramish.hipal_messenger.service;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.ramish.hipal_messenger.HiPalMessengerApp;
 import com.example.ramish.hipal_messenger.firebase.FirebaseHandler;
 import com.example.ramish.hipal_messenger.model.User;
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
@@ -42,5 +44,42 @@ public class LocalUserService {
 
         localUser=new User(name,email,fcnt,favcnt,freqcnt,notcnt);
         return localUser;
+    }
+
+    public static void loggedInUserUpdate(final User user){
+        FirebaseHandler.getInstance().getUserRef().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                User specificUser = dataSnapshot.getValue(User.class);
+                if (user.getUserName().equals(specificUser.getUserName())){
+                    user.setFriendCounter(specificUser.getFriendCounter());
+                    user.setFavoritesCounter(specificUser.getFavoritesCounter());
+                    user.setFriendReqCounter(specificUser.getFriendReqCounter());
+                    user.setNotificationCounter(specificUser.getNotificationCounter());
+                    setUserLocally(user);
+                }
+                Log.d("FromUpdateUser", specificUser.getUserName());
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 }
