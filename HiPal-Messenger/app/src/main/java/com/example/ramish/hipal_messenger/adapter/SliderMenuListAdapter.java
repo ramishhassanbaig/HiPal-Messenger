@@ -41,6 +41,10 @@ public class SliderMenuListAdapter extends ArrayAdapter {
         icon.setImageResource(sliderMenuListItems.get(position).getIcon());
         title.setText(sliderMenuListItems.get(position).getTitle());
 
+        if (sliderMenuListItems.get(position).getCount()==0){
+            sliderMenuListItems.get(position).setCountVisible(false);
+        }
+
         if (sliderMenuListItems.get(position).isCountVisible()){
             sliderMenuListItems.get(position).setCountVisible(true);
             count.setText(String.valueOf(sliderMenuListItems.get(position).getCount()));

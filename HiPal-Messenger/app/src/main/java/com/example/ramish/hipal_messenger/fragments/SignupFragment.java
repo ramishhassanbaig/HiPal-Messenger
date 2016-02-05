@@ -32,7 +32,10 @@ import com.example.ramish.hipal_messenger.model.User;
 import com.example.ramish.hipal_messenger.service.UserCreationService;
 import com.example.ramish.hipal_messenger.utils.Util;
 import com.firebase.client.AuthData;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,7 +78,6 @@ public class SignupFragment extends Fragment {
     private User newCreatedUser;
 
     public static ProgressDialog signUpProgressDialog;
-
 
 
     public SignupFragment() {
@@ -138,12 +140,7 @@ public class SignupFragment extends Fragment {
         mNextButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (mPasswordField.getText()==mPasswordConfirmField.getText()){
-//                    userPassword=passwordField;
-//                }
-//                else {
-//                    mPasswordConfirmField.setError("Passwords does not match");
-//                }
+
 
                 if (mEmailField.getText().toString().equals("") || mPasswordField.getText().toString().equals("") || mPasswordConfirmField.getText().toString().equals("")) {
                     if (mEmailField.getText().toString().equals("")) {
@@ -184,19 +181,24 @@ public class SignupFragment extends Fragment {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newCreatedUser=getSignUpDetails();
+                newCreatedUser = getSignUpDetails();
                 Log.d("Signup:", newCreatedUser.getFirstName() + ", " + newCreatedUser.getLastName() + ", " +
                         newCreatedUser.getGender() + ", " + newCreatedUser.getEmail() + ", " + newCreatedUser.getPassword());
 
-                signUpProgressDialog=new ProgressDialog((MainActivity)getActivity());
+                signUpProgressDialog = new ProgressDialog((MainActivity) getActivity());
                 signUpProgressDialog.setTitle("Creating User");
                 signUpProgressDialog.setMessage("Please Wait...");
                 signUpProgressDialog.setIndeterminate(true);
                 signUpProgressDialog.setCancelable(false);
-                new SignUpProgress(newCreatedUser).execute();
-
-//                Intent i = new Intent(getActivity(), HomeActivity.class);
-//                startActivity(i);
+//                new SignUpProgress(newCreatedUser).execute();
+                signUpProgressDialog.show();
+                UserCreationService.createAuthenticatedUser(newCreatedUser,getActivity(),signUpProgressDialog);
+                mFirstNameField.setText(null);
+                mLastNameField.setText(null);
+                mBirthDate.setText(null);
+                mEmailField.setText(null);
+                mPasswordField.setText(null);
+                mPasswordConfirmField.setText(null);
             }
         });
 
@@ -284,37 +286,39 @@ public class SignupFragment extends Fragment {
         }
     }
 
-    private class SignUpProgress extends AsyncTask<Void,Void,Void>{
 
-        private User asyncUser;
-
-        public SignUpProgress(User user){
-            asyncUser =user;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            signUpProgressDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                UserCreationService.createAuthenticatedUser(asyncUser);
-                Thread.sleep(3000);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            signUpProgressDialog.dismiss();
-            Intent i = new Intent(getActivity(), HomeActivity.class);
-            startActivity(i);
-        }
-    }
+//    private class SignUpProgress extends AsyncTask<Void,Void,Void>{
+//
+//        private User asyncUser;
+//
+//        public SignUpProgress(User user){
+//            asyncUser =user;
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            signUpProgressDialog.show();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            try {
+//                Thread.sleep(3000);
+//                UserCreationService.createAuthenticatedUser(asyncUser, getActivity());
+//
+//            }catch (Exception e){
+//                e.printStackTrace();
+//
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            signUpProgressDialog.dismiss();
+//
+//        }
+//    }
 
 
 }

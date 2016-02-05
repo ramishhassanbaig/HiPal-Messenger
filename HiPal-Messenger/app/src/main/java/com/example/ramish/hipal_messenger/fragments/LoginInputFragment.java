@@ -1,6 +1,7 @@
 package com.example.ramish.hipal_messenger.fragments;
 
 
+import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.ramish.hipal_messenger.R;
 import com.example.ramish.hipal_messenger.activity.MainActivity;
+import com.example.ramish.hipal_messenger.service.UserCreationService;
 import com.example.ramish.hipal_messenger.utils.Util;
 
 /**
@@ -31,6 +33,11 @@ public class LoginInputFragment extends Fragment {
     private Button mLoginButton;
     private ImageButton mBackButton;
     private Typeface typeface;
+
+    private ProgressDialog loginProgressDialog;
+
+    private String loginEmail;
+    private String loginPassword;
 
     public LoginInputFragment() {
         // Required empty public constructor
@@ -62,6 +69,23 @@ public class LoginInputFragment extends Fragment {
             public void onClick(View v) {
                 ((MainActivity) getActivity()).getSupportFragmentManager().popBackStack();
                 Util.showToast("popped back");
+            }
+        });
+
+
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginEmail=mEmailField.getText().toString();
+                loginPassword=mPasswordField.getText().toString();
+
+                loginProgressDialog= new ProgressDialog((MainActivity) getActivity());
+                loginProgressDialog.setTitle("Logging In");
+                loginProgressDialog.setMessage("Please Wait...");
+                loginProgressDialog.setIndeterminate(true);
+                loginProgressDialog.setCancelable(false);
+                loginProgressDialog.show();
+                UserCreationService.loginAuthenticatedUser(loginEmail,loginPassword,loginProgressDialog,getActivity());
             }
         });
 

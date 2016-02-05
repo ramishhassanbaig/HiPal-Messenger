@@ -1,6 +1,5 @@
 package com.example.ramish.hipal_messenger.activity;
 
-import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -16,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
-import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,7 +28,8 @@ import com.example.ramish.hipal_messenger.fragments.FriendRequestFragment;
 import com.example.ramish.hipal_messenger.fragments.FriendsFragment;
 import com.example.ramish.hipal_messenger.fragments.NotificationsFragment;
 import com.example.ramish.hipal_messenger.fragments.SliderMenuFragment;
-import com.example.ramish.hipal_messenger.model.Notification;
+import com.example.ramish.hipal_messenger.model.User;
+import com.example.ramish.hipal_messenger.service.LocalUserService;
 import com.example.ramish.hipal_messenger.utils.Util;
 
 public class HomeActivity extends AppCompatActivity implements SliderMenuFragment.FragmentDrawerListener{
@@ -45,10 +44,15 @@ public class HomeActivity extends AppCompatActivity implements SliderMenuFragmen
     private int[] tabIcons={R.drawable.chats_icon,R.drawable.friends_icon,R.drawable.notification};
     private boolean backPressedOnce=false;
 
+    private User currentLoggedInUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        currentLoggedInUser= LocalUserService.getLocalUser();
+        Log.d("HomeUser", currentLoggedInUser.getUserName().toString());
 
         toolbar=(Toolbar)findViewById(R.id.hipal_toolbar);
         fragmentContainer=(FrameLayout)findViewById(R.id.fragment_container_home);
@@ -98,9 +102,8 @@ public class HomeActivity extends AppCompatActivity implements SliderMenuFragmen
         }
 
         sliderMenuFragment=(SliderMenuFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_slider_menu);
-        sliderMenuFragment.setUpSliderMenuFragment(R.id.fragment_slider_menu,(DrawerLayout)findViewById(R.id.home_drawer_layout),toolbar);
+        sliderMenuFragment.setUpSliderMenuFragment(R.id.fragment_slider_menu, (DrawerLayout) findViewById(R.id.home_drawer_layout), toolbar);
         sliderMenuFragment.setDrawerListener(this);
-
 
     }
 

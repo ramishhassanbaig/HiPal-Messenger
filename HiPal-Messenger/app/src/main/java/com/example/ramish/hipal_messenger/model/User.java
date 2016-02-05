@@ -18,6 +18,8 @@ public class User {
 
     private String userName;
 
+    public User(){}
+
     public User(String firstName, String lastName, int gender, String dOB, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,6 +40,7 @@ public class User {
         this.online = online;
     }
 
+
     public User(int friendCounter, int favoritesCounter, int friendReqCounter, int notificationCounter) {
         this.friendCounter = friendCounter;
         this.favoritesCounter = favoritesCounter;
@@ -53,6 +56,15 @@ public class User {
         this.email = email;
         this.password = password;
         this.online = online;
+        this.friendCounter = friendCounter;
+        this.favoritesCounter = favoritesCounter;
+        this.friendReqCounter = friendReqCounter;
+        this.notificationCounter = notificationCounter;
+    }
+
+    public User(String userName, String email, int friendCounter, int favoritesCounter, int friendReqCounter, int notificationCounter) {
+        this.userName=userName;
+        this.email = email;
         this.friendCounter = friendCounter;
         this.favoritesCounter = favoritesCounter;
         this.friendReqCounter = friendReqCounter;
