@@ -1,13 +1,100 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.ramish.hipal_messenger.fragments.FindPeopleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="Find People Fragment" />-->
+
+    <LinearLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorButton"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/search_people"
+            android:layout_width="354dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.9"
+            android:hint="Search People"
+            android:textColorHint="@color/textColorPrimary"
+            android:textColor="@color/textColorPrimary"
+            android:textAlignment="textEnd"
+            android:layout_gravity="end"
+            android:paddingRight="15dp"
+            android:textSize="18dp"
+            android:background="@null"
+            />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:background="#013d5c"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"/>
+
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_search_white"
+            android:background="@color/colorButton"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.1"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Find People Fragment" />
+        android:layout_below="@+id/search_layout">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/search_result_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="16dp"
+            android:text="No results Found"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/search_progress_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/searching_progress_bar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:indeterminateBehavior="cycle"
+                android:indeterminate="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/searching_progress_bar"
+                android:text="Searching..."
+                android:textColor="@color/textColorPrimary"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

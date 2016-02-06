@@ -64,9 +64,13 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:hint="Enter Email"
+            android:inputType="textEmailAddress"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/textColorPrimary"
+            android:text="mrhb1993@hotmail.com"
             android:gravity="center"
+            android:maxLength="30"
+            android:singleLine="true"
             android:layout_margin="10dp"
             />
 
@@ -75,8 +79,12 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:hint="Enter Password"
+            android:inputType="textPassword"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/textColorPrimary"
+            android:text="123"
+            android:maxLength="20"
+            android:singleLine="true"
             android:gravity="center"
             android:layout_margin="10dp"
             />
