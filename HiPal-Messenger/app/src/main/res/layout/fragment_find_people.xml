@@ -52,10 +52,19 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <ListView
+        android:id="@+id/people_found_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/search_layout">
+        android:layout_below="@+id/search_layout"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/messages_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_layout"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/search_result_message"

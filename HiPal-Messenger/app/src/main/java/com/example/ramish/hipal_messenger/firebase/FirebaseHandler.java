@@ -10,6 +10,7 @@ public class FirebaseHandler {
     private static final String URL="https://hipal.firebaseio.com/";
     private Firebase rootRef;
     private Firebase userRef;
+    private Firebase userFriendReq;
 
     public FirebaseHandler(){
         rootRef =new Firebase(URL);
@@ -33,7 +34,9 @@ public class FirebaseHandler {
         return userRef=rootRef.child("Users");
     }
 
-
+    public Firebase getFriendReqRef(){
+        return userFriendReq=rootRef.child("FriendRequests");
+    }
 
 
 }

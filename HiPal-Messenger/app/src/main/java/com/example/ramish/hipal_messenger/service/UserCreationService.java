@@ -91,7 +91,7 @@ public class UserCreationService {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                             User specificUser = userSnapshot.getValue(User.class);
-                            Log.d("FromFirebase", "User=" + specificUser.getUserName());
+                            Log.d("FromFirebase_Iterating", "User=" + specificUser.getUserName());
                             if (email.equals(specificUser.getEmail())) {
 
                                 Map<String, Object> changeOnlineStatus = new Hashtable<String, Object>();
