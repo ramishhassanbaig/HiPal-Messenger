@@ -11,6 +11,7 @@ public class FirebaseHandler {
     private Firebase rootRef;
     private Firebase userRef;
     private Firebase userFriendReq;
+    private Firebase userFriends;
 
     public FirebaseHandler(){
         rootRef =new Firebase(URL);
@@ -38,5 +39,7 @@ public class FirebaseHandler {
         return userFriendReq=rootRef.child("FriendRequests");
     }
 
-
+    public Firebase getFriendsRef() {
+        return userFriends=rootRef.child("Friends");
+    }
 }

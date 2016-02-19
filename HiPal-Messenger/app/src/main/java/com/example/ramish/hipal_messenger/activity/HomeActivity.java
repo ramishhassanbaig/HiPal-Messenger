@@ -44,7 +44,11 @@ public class HomeActivity extends AppCompatActivity implements SliderMenuFragmen
     private int[] tabIcons={R.drawable.chats_icon,R.drawable.friends_icon,R.drawable.notification};
     private boolean backPressedOnce=false;
 
-    private User currentLoggedInUser;
+    public static User currentLoggedInUser;
+
+    public static User getCurrentLoggedInUser() {
+        return currentLoggedInUser;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

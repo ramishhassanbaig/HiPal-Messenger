@@ -8,10 +8,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ramish.hipal_messenger.R;
+import com.example.ramish.hipal_messenger.activity.HomeActivity;
 import com.example.ramish.hipal_messenger.firebase.FirebaseHandler;
 import com.example.ramish.hipal_messenger.listener.ListenerService;
 import com.example.ramish.hipal_messenger.model.User;
 import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
@@ -38,7 +40,9 @@ public class FriendsService {
 
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()){
                     User specificUser=userSnapshot.getValue(User.class);
-                    if (name.equals(specificUser.getUserName()) || specificUser.getUserName().contains(name)){
+                    if ((name.equals(specificUser.getUserName()) || specificUser.getUserName().contains(name))
+                                && (!(specificUser.getUserName().equals(HomeActivity.getCurrentLoggedInUser().getUserName()))) ){
+
                         firebaseUserList.add(specificUser);
 //                        listenerService.passObject(specificUser);
                         Log.d("FromFindPeopleService", "User " + cnt + " Found=" + specificUser.getUserName());
@@ -63,5 +67,13 @@ public class FriendsService {
                 Log.d("FromFindPeopleService",firebaseError.toString());
             }
         });
+    }
+
+    public static void SendFriendRequestService(String username,String friendName){
+        Firebase userRef=FirebaseHandler.getInstance().getFriendReqRef().child(username);
+        Firebase friendRef=FirebaseHandler.getInstance().getFriendReqRef().child(friendName);
+
+        userRef.child("ReqTo").push().setValue(friendName);
+        friendRef.child("ReqFrom").push().setValue(username);
     }
 }
