@@ -11,6 +11,8 @@ import com.example.ramish.hipal_messenger.R;
 import com.example.ramish.hipal_messenger.activity.HomeActivity;
 import com.example.ramish.hipal_messenger.firebase.FirebaseHandler;
 import com.example.ramish.hipal_messenger.listener.ListenerService;
+import com.example.ramish.hipal_messenger.listener.PassingService;
+import com.example.ramish.hipal_messenger.model.FriendRequest;
 import com.example.ramish.hipal_messenger.model.User;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -73,7 +75,42 @@ public class FriendsService {
         Firebase userRef=FirebaseHandler.getInstance().getFriendReqRef().child(username);
         Firebase friendRef=FirebaseHandler.getInstance().getFriendReqRef().child(friendName);
 
-        userRef.child("ReqTo").push().setValue(friendName);
-        friendRef.child("ReqFrom").push().setValue(username);
+        FriendRequest userReq=new FriendRequest(username,false);
+        FriendRequest friendReq=new FriendRequest(friendName,false);
+
+        userRef.child("ReqTo").push().setValue(friendReq);
+        friendRef.child("ReqFrom").push().setValue(userReq);
+    }
+
+    public static void getAllFriendRequests(View v,final PassingService<FriendRequest> listener){
+
+        final TextView resultMessage=(TextView)v.findViewById(R.id.message);
+        final ListView requestsListView=(ListView)v.findViewById(R.id.friend_request_list_view);
+        final ArrayList<FriendRequest> requests=new ArrayList<>();
+        Firebase ref=FirebaseHandler.getInstance().getFriendReqRef()
+                .child(HomeActivity.getCurrentLoggedInUser().getUserName()).child("ReqFrom");
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()){
+                    FriendRequest specificRequests=userSnapshot.getValue(FriendRequest.class);
+                    requests.add(specificRequests);
+                }
+                if (requests.size()>=1) {
+                    listener.passArrayList(requests);
+                }
+                else{
+                    resultMessage.setVisibility(View.VISIBLE);
+                    requestsListView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.d("GetFriendsService",firebaseError.toString());
+            }
+        });
+
     }
 }

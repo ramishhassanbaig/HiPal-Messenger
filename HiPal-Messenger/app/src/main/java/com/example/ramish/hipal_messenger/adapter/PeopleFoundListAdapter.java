@@ -14,8 +14,10 @@ import android.widget.TextView;
 import com.example.ramish.hipal_messenger.R;
 import com.example.ramish.hipal_messenger.activity.HomeActivity;
 import com.example.ramish.hipal_messenger.firebase.FirebaseHandler;
+import com.example.ramish.hipal_messenger.model.FriendRequest;
 import com.example.ramish.hipal_messenger.model.User;
 import com.example.ramish.hipal_messenger.service.FriendsService;
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -52,9 +54,11 @@ public class PeopleFoundListAdapter extends ArrayAdapter {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot reqSnapshot: dataSnapshot.getChildren()){
-                    String specificUserNames=reqSnapshot.getValue(String.class);
-                    if (specificUserNames.equals(userArrayList.get(position).getUserName())){
+                    FriendRequest specificUserNames=reqSnapshot.getValue(FriendRequest.class);
+
+                    if (specificUserNames.getName().equals(userArrayList.get(position).getUserName())){
                         sendFriendRequestButton.setText("Request Sent");
                         sendFriendRequestButton.setBackgroundResource(R.drawable.button_background_disabled);
                         sendFriendRequestButton.setEnabled(false);
@@ -75,7 +79,7 @@ public class PeopleFoundListAdapter extends ArrayAdapter {
                 String friendName=userArrayList.get(position).getUserName();
                 FriendsService.SendFriendRequestService(HomeActivity.getCurrentLoggedInUser().getUserName(),friendName);
 //                userArrayList.remove(position);
-//                notifyDataSetChanged();
+                notifyDataSetChanged();
             }
         });
 

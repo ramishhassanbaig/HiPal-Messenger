@@ -7,6 +7,13 @@ public class FriendRequest {
     String name;
     boolean accepted;
 
+    public FriendRequest(){};
+
+    public FriendRequest(String name, boolean accepted) {
+        this.name = name;
+        this.accepted = accepted;
+    }
+
     public String getName() {
         return name;
     }

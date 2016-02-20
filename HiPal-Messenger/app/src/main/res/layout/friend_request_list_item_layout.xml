@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:padding="10dp"
+    android:background="@color/textColorPrimary">
+
+    <TextView
+        android:id="@+id/request_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textSize="18dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/colorButton"/>
+
+    <Button
+        android:id="@+id/accept_request_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:text="Accept"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textColor="@color/textColorPrimary"
+        android:layout_marginRight="5dp"
+        android:enabled="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/decline_request_button"
+        android:layout_toStartOf="@+id/decline_request_button" />
+
+    <Button
+        android:id="@+id/decline_request_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:text="Decline"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textColor="@color/textColorPrimary"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:enabled="true"/>
+
+</RelativeLayout>
